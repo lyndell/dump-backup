@@ -23,9 +23,14 @@
 
 ## dump
 
-/dev/sda2 on /boot type ext4 (rw)
+```
+root@z0 dump-backup $ mount | grep sda | grep ext4
 /dev/sda3 on / type ext4 (rw)
+/dev/sda2 on /boot type ext4 (rw)
+/dev/sda14 on /tmp type ext4 (rw)
 /dev/sda4 on /var type ext4 (rw)
+root@z0 dump-backup $ 
+```
 
 ## xfsdump
 
