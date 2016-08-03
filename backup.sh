@@ -13,20 +13,15 @@ DAYOFWEEK=`date +%a`
 echo $DAYOFWEEK
 
 # /dev/sda2
-dump -0uf ${bakdir}/root.${bakver}.dump / 
-dump -0uf ${bakdir}/boot.${bakver}.dump /boot 
-dump -0uf ${bakdir}/tmp.${bakver}.dump  /tmp
+for I in sda3 sda4 sda14 sda2 
+do
+  mount -o remount,ro /dev/${I}
+  dump -0uf ${bakdir}/${I}.${bakver}.dump /dev/${I}
+  mount -o remount,rw /dev/${I}
+done
+
 
 exit;
-
-/dev/sda14 on /tmp type ext4 (rw)
-/dev/sda2 on /boot type ext4 (rw)
-/dev/sda3 on / type ext4 (rw)
-/dev/sda4 on /var type ext4 (rw)
-/dev/sda2 on /boot type ext4 (rw)
-/dev/sda3 on / type ext4 (rw)
-/dev/sda4 on /var type ext4 (rw)
-exit
 
 case $DAYOFWEEK in 
   Sun) echo "set increment" ;;
